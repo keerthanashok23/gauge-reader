@@ -114,19 +114,9 @@ Main dependencies:
 
 ---
 
-## 📸 Sample Outputs
-
-- Green box = min/max
-- Red dot = base/tip
-- OCR box = blue
-- Output image shown in browser or plotted in CLI
-
----
-
 ## 🧾 Author & Info
 
 - Date: April 10, 2025
-- Author: AI Assistant + User Collaboration
-- Status: Production-ready with both GUI and CLI
+- Author: Keerthana Ashokkumar
 
 ---
