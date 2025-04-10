@@ -53,6 +53,12 @@ Start the app using:
 python app.py
 ```
 
+Then visit the app in your browser:
+
+```bash
+http://127.0.0.1:5000
+```
+
 ### Features
 - Upload gauge image
 - OCR automatically detects `min` and `max` values
