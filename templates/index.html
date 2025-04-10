@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gauge Reader</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; text-align: center; padding: 30px; }
+        form { background: white; padding: 20px; border-radius: 10px; display: inline-block; }
+        input[type="file"], input[type="number"] { margin: 10px; }
+        .result { margin-top: 30px; }
+        img { max-width: 500px; border: 1px solid #ccc; border-radius: 5px; margin-top: 10px; }
+        .error { color: red; font-weight: bold; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Gauge Reader Web App</h1>
+
+    <form action="/predict" method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" required><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if result %}
+        <div class="result">
+            <h2>Result:</h2>
+
+            {% if result.error %}
+                <p class="error">{{ result.error }}</p>
+                <form action="/recalculate" method="POST">
+                    <input type="hidden" name="filename" value="{{ result.filename }}">
+                    <input type="number" name="min_value" step="any" placeholder="Enter Minimum Value" required>
+                    <input type="number" name="max_value" step="any" placeholder="Enter Maximum Value" required><br>
+                    <button type="submit">Recalculate</button>
+                </form>
+                <br>
+            {% else %}
+                <p><strong>Minimum Value (OCR):</strong> {{ result.min_val }}</p>
+                <p><strong>Maximum Value (OCR):</strong> {{ result.max_val }}</p>
+                <p><strong>Gauge Reading:</strong> {{ result.reading }}</p>
+            {% endif %}
+
+            <!-- Image is always shown below result -->
+            <div style="margin-top: 20px;">
+                <img src="{{ url_for('static', filename=result.filename) }}" alt="Result">
+            </div>
+        </div>
+    {% endif %}
+
+</body>
+</html>
